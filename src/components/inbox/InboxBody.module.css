@@ -1,0 +1,77 @@
+.inboxContainer {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.closeButton {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.closeButton:hover {
+    background-color: #d9363e;
+}
+
+.emailList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.emailItem {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+/* ✅ Unread emails will have a light blue background */
+.unreadEmail {
+    background-color: #e3f2fd;
+    font-weight: bold;
+}
+
+/* ✅ Read emails will have a normal background */
+.readEmail {
+    background-color: white;
+    color: #555;
+    font-weight: normal;
+}
+
+.emailItem:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.emailItem strong {
+    color: #333;
+}
+
+.noEmails {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    padding: 20px 0;
+}
+
+

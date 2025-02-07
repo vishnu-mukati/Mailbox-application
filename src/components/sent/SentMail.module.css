@@ -1,9 +1,12 @@
 /* General Styles */
 .sentContainer {
-    text-align: center;
+    max-width: 600px;
+    margin: 20px auto;
     padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
-    background-color: #F4F7FC; /* Soft Light Blue background */
     box-sizing: border-box;
 }
 
@@ -14,19 +17,23 @@
 }
 
 .sentList {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
     margin: 0;
-    width: 100%; /* Make the list take full width */
+    width: 100%;
 }
 
 .sentList li {
-    padding: 15px; /* Add some padding for better spacing */
-    border-bottom: 1px solid #D6D6D6;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
     display: flex;
-    justify-content: space-between; /* Push To and Subject to opposite sides */
+    justify-content: space-between;
     align-items: center;
-    width: 100%; /* Make each list item span full width */
 }
 
 .sentList li strong {

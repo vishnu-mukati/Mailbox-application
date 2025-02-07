@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { ComposeAction } from "../../store/ComposeSlice";
-import styles from "./Inbox.module.css"; // Import CSS module
+import InboxBody from "./InboxBody";
+import styles from "./Inbox.module.css";
 
 const Inbox = ({ closeInboxPage }) => {
     const dispatch = useDispatch();
+    const [selectedMail, setSelectedMail] = useState(null);
     const userEmail = useSelector((state) => state.auth.email);
     const inboxEmails = useSelector((state) => state.compose.inbox);
 
@@ -15,16 +17,18 @@ const Inbox = ({ closeInboxPage }) => {
         }
     }, [userEmail]);
 
+
     async function getData() {
         try {
             const response = await axios.get(`https://mailbox-compose-email-default-rtdb.firebaseio.com/emails/${userEmail}/inbox.json`);
-            
+
+            const readEmails = JSON.parse(localStorage.getItem('readEmails')) || [];
             if (response.data) {
                 const inboxMails = Object.keys(response.data).map((key) => ({
                     id: key,
                     ...response.data[key],
+                    isRead: readEmails.includes(key),
                 }));
-                console.log(inboxEmails);
                 dispatch(ComposeAction.inboxEmail(inboxMails));
             } else {
                 dispatch(ComposeAction.inboxEmail([]));
@@ -34,30 +38,66 @@ const Inbox = ({ closeInboxPage }) => {
         }
     }
 
+    const emailClickHandler = (mail) => {
+        setSelectedMail(mail);
+
+        const readEmails = JSON.parse(localStorage.getItem('readEmails')) || [];
+        if (!readEmails.includes(mail.id)) {
+            readEmails.push(mail.id);
+            localStorage.setItem('readEmails', JSON.stringify(readEmails));
+        }
+    
+        dispatch(ComposeAction.markAsRead(mail.id));
+    };
+
+    const goBackHandler = () => {
+        setSelectedMail(null);
+    };
+
     return (
         <div className={styles.inboxContainer}>
             <div className={styles.header}>
-                <h1>📥 Inbox</h1>
+                <div className={styles.headerContent}>
+                    {selectedMail && (
+                        <button className={styles.backButton} onClick={goBackHandler}>
+                            ⬅ Back
+                        </button>
+                    )}
+                    <h1>📥 Inbox </h1>
+                </div>
+
                 <button className={styles.closeButton} onClick={closeInboxPage}>
                     Close
                 </button>
             </div>
 
-            {inboxEmails.length === 0 ? (
-                <p className={styles.noEmails}>No emails found.</p>
+            {!selectedMail ? (
+                <div>
+                    {inboxEmails.length === 0 ? (
+                        <p className={styles.noEmails}>No emails found.</p>
+                    ) : (
+                        <ul className={styles.emailList}>
+                            {inboxEmails.map((email) => (
+                                <li
+                                    key={email.id}
+                                    onClick={() => emailClickHandler(email)}
+                                    className={`${styles.emailItem} ${email.isRead ? styles.readEmail : styles.unreadEmail}`}
+                                >
+                                    <strong>From:</strong> {email.from} <br />
+                                    <strong>Subject:</strong> {email.subject}
+                                </li>
+                            ))}
+                        </ul>
+
+                    )}
+                </div>
             ) : (
-                <ul className={styles.emailList}>
-                    {inboxEmails.map((email) => (
-                        <li key={email.id} className={styles.emailItem}>
-                            <strong>From:</strong> {email.from} <br />
-                            <strong>Subject:</strong> {email.subject} <br />
-                            <strong>Message:</strong> {email.emailBody}
-                        </li>
-                    ))}
-                </ul>
+                <InboxBody mail={selectedMail} />
             )}
         </div>
     );
+    
+
 };
 
 export default Inbox;

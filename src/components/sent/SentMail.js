@@ -11,6 +11,7 @@ const SentMail = ({ closeSentPage }) => {
     const usersentData = useSelector(state => state.compose.sent);
     const [selectedMail, setSelectedMail] = useState(null); // State to store the selected email
 
+
     useEffect(() => {
         getSentMailData();
     }, []);
@@ -33,8 +34,9 @@ const SentMail = ({ closeSentPage }) => {
         }
     }
 
-    const handleEmailClick = (mail) => {
+    const emailClickHandler = (mail) => {
         setSelectedMail(mail); // Set the selected mail to show its body
+        // dispatch(ComposeAction.unseenEmail(1));
     };
 
     return (
@@ -47,7 +49,7 @@ const SentMail = ({ closeSentPage }) => {
                             <li>No Sent Emails Found.</li>
                         ) : (
                             usersentData.map((mail) => (
-                                <li key={mail.id} onClick={() => handleEmailClick(mail)} className={classes.sentListItem}>
+                                <li key={mail.id} onClick={() => emailClickHandler(mail)} className={classes.sentListItem}>
                                     <strong>To:</strong> {mail.to}
                                     <span className={classes.subjectData}>{mail.subject}</span>
                                     <hr />

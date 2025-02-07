@@ -1,63 +1,164 @@
-/* Inbox.module.css */
 .inboxContainer {
     max-width: 600px;
+    width: 100%;
+    /* Ensure the container doesn't exceed screen width */
     margin: 20px auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
-  }
-  
-  .header {
+    box-sizing: border-box;
+    /* Includes padding and border in the element's total width */
+    overflow: hidden;
+    /* Prevents content overflow */
+}
+
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-  }
-  
-  .closeButton {
-    background-color: #ff4d4f;
+    padding: 0 10px;
+    flex-wrap: wrap;
+    /* Wraps content if it overflows */
+}
+
+.headerContent {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    /* Ensure header content wraps on small screens */
+}
+
+.backButton,
+.closeButton {
+    background-color: #007bff;
     color: white;
     border: none;
     padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
+    margin: 5px;
+    /* Space around buttons */
     transition: background-color 0.3s ease;
-  }
-  
-  .closeButton:hover {
+    box-sizing: border-box;
+}
+
+.backButton:hover {
+    background-color: #0056b3;
+}
+
+.closeButton {
+    background-color: #ff4d4f;
+}
+
+.closeButton:hover {
     background-color: #d9363e;
-  }
-  
-  .emailList {
+}
+
+.emailList {
     list-style: none;
     padding: 0;
     margin: 0;
-  }
-  
-  .emailItem {
+}
+
+.emailItem {
     background-color: white;
     border: 1px solid #ddd;
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 8px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .emailItem:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .emailItem strong {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    word-wrap: break-word;
+    /* Ensures long text wraps inside the container */
+}
+
+.unreadEmail::before {
+    content: '•';
+    /* The dot symbol */
+    color: blue;
+    /* Blue color */
+    font-size: 20px;
+    /* Adjust size */
+    margin-right: 8px;
+    /* Space between dot and email content */
+    vertical-align: middle;
+    /* Align properly with text */
+}
+
+
+/* Unread and Read Email Styles */
+.unreadEmail {
+    background-color: #bbbbbb;
+    font-weight: bold;
+}
+
+.readEmail {
+    background-color: white;
+    color: #555;
+    font-weight: normal;
+}
+
+/* Hover Effect */
+.emailItem:hover {
+    background-color: #E3F2FD;
+}
+
+.emailItem strong {
     color: #333;
-  }
-  
-  .noEmails {
+}
+
+.noEmails {
     text-align: center;
     color: #888;
     font-style: italic;
     padding: 20px 0;
-  }
-  
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+    .inboxContainer {
+        padding: 15px;
+    }
+
+    .headerContent {
+        flex-direction: column;
+        /* Stack items vertically on small screens */
+        align-items: flex-start;
+    }
+
+    .emailItem {
+        flex-direction: column;
+        /* Stack email content vertically */
+        align-items: flex-start;
+    }
+
+    .backButton,
+    .closeButton {
+        width: 100%;
+        /* Full-width buttons on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .inboxContainer {
+        padding: 10px;
+    }
+
+    .emailItem {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .backButton,
+    .closeButton {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
