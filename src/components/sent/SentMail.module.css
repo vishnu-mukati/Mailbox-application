@@ -1,0 +1,137 @@
+/* General Styles */
+.sentContainer {
+    text-align: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #F4F7FC; /* Soft Light Blue background */
+    box-sizing: border-box;
+}
+
+.sentTitle {
+    font-size: 2rem;
+    color: #333333; /* Dark Gray */
+    margin-bottom: 20px;
+}
+
+.sentList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Make the list take full width */
+}
+
+.sentList li {
+    padding: 15px; /* Add some padding for better spacing */
+    border-bottom: 1px solid #D6D6D6;
+    display: flex;
+    justify-content: space-between; /* Push To and Subject to opposite sides */
+    align-items: center;
+    width: 100%; /* Make each list item span full width */
+}
+
+.sentList li strong {
+    color: #2196F3; /* Blue for 'To' label */
+}
+
+.sentList li .subjectData {
+    font-weight: normal;
+    color: #333333;
+    margin-left: 20px; /* Added some space between "To" and Subject */
+    font-size: 1rem;
+    flex-grow: 1; /* Allow subject to take remaining space */
+}
+
+.sentList li:hover {
+    background-color: #E3F2FD; /* Light blue on hover */
+}
+
+.closeButton {
+    padding: 12px 24px;
+    font-size: 1rem;
+    color: white;
+    background-color: #F44336; /* Red */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.closeButton:hover {
+    background-color: #c82333; /* Darker red */
+}
+
+/* Media Query for Tablets and Below */
+@media (max-width: 1024px) {
+    .sentContainer {
+        padding: 15px;
+    }
+
+    .sentTitle {
+        font-size: 1.8rem; /* Slightly smaller font size for tablets */
+    }
+
+    .sentList li {
+        padding: 12px; /* Adjust padding for smaller screens */
+    }
+
+    .sentList li .subjectData {
+        font-size: 0.9rem; /* Make subject text slightly smaller */
+    }
+
+    .closeButton {
+        width: 100%; /* Full width close button on smaller screens */
+        padding: 12px;
+        font-size: 1.1rem; /* Adjust font size for small screens */
+    }
+}
+
+/* Media Query for Phones and Below */
+@media (max-width: 768px) {
+    .sentContainer {
+        padding: 10px;
+    }
+
+    .sentTitle {
+        font-size: 1.6rem; /* Reduce font size for small screens */
+    }
+
+    .sentList li {
+        padding: 10px; /* Less padding on phones */
+    }
+
+    .sentList li .subjectData {
+        font-size: 0.9rem; /* Reduce subject text size further */
+    }
+
+    .closeButton {
+        width: 100%; /* Full-width button */
+        padding: 10px;
+        font-size: 1rem; /* Adjust font size for phones */
+    }
+}
+
+/* Media Query for Extra Small Phones */
+@media (max-width: 480px) {
+    .sentContainer {
+        padding: 5px;
+    }
+
+    .sentTitle {
+        font-size: 1.4rem; /* Further reduce font size for extra small screens */
+    }
+
+    .sentList li {
+        padding: 8px; /* Further reduce padding for very small screens */
+    }
+
+    .sentList li .subjectData {
+        font-size: 0.85rem; /* Smaller font for subject text */
+    }
+
+    .closeButton {
+        width: 100%;
+        padding: 8px;
+        font-size: 0.9rem; /* Make button smaller on very small screens */
+    }
+}

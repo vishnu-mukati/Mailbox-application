@@ -1,0 +1,168 @@
+/* General Styles */
+.emailForm {
+    width: 90%;
+    max-width: 600px;
+    height: auto;
+    margin: 35px auto;
+    border: 1px solid #D6D6D6;
+    border-radius: 8px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #FFFFFF; /* White background */
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.inputField {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #D6D6D6;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.subjectField {
+    margin-bottom: 10px;
+}
+
+.textarea {
+    width: 100%;
+    height: 200px;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #D6D6D6;
+    border-radius: 4px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+    background-color: #F4F7FC; /* Soft Light Blue */
+    box-sizing: border-box;
+    resize: none;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.sendBtn, .discardBtn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.sendBtn {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.sendBtn:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+.discardBtn {
+    background-color: #F44336; /* Red */
+    color: white;
+}
+
+.discardBtn:hover {
+    background-color: #e53935; /* Darker red */
+}
+
+.deleteBtn {
+    background-color: transparent;
+    border: none;
+    color: #FF5722; /* Deep Orange */
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Media Query for Tablets and Below */
+@media (max-width: 1024px) {
+    .emailForm {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .inputField, .textarea {
+        width: 100%;
+    }
+
+    .buttonGroup {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .sendBtn, .discardBtn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Media Query for Phones */
+@media (max-width: 768px) {
+    .emailForm {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .inputField, .textarea {
+        width: 100%;
+    }
+
+    .buttonGroup {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .sendBtn, .discardBtn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .sendBtn {
+        margin-bottom: 10px;
+    }
+}
+
+/* Media Query for Extra Small Phones */
+@media (max-width: 480px) {
+    .emailForm {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .header {
+        align-items: stretch;
+    }
+
+    .inputField, .textarea {
+        font-size: 14px;
+    }
+
+    .sendBtn, .discardBtn {
+        padding: 8px 15px;
+    }
+
+    .deleteBtn {
+        font-size: 14px;
+    }
+}

@@ -1,32 +1,75 @@
 import { Fragment, useState } from "react";
-import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/AuthSlice";
+import Compose from "../compose/Compose";
+import Sent from "../sent/SentMail";
 import Inbox from "../inbox/Inbox";
+import classes from "./Welcome.module.css";  // Import CSS module
 
-const Welcome = () =>{
-
+const Welcome = () => {
     const dispatch = useDispatch();
-    const [showInbox,setShowInbox] = useState(false);
+    const [currentPage, setCurrentPage] = useState(null);
+    // const [showPage, setShowPage] = useState(false);
+    // const [showList, setShowList] = useState(false);
+    // const [showInbox,setShowInbox] = useState(false);
 
-    const logoutHandler = () =>{
+    const logoutHandler = () => {
         dispatch(authActions.logout());
-    }
+    };
 
-    const toggleInboxHandler = () =>{
-        setShowInbox((prevState)=>!prevState);
-    }
+    const togglePageHandler = (page) => {
+        // If the same page is clicked again, close it, otherwise open the clicked page
+        setCurrentPage((prevPage) => (prevPage === page ? null : page));
+    };
+
+//     const toggleComposePageHandler = () => {
+//         setShowPage((prevState) => !prevState);
+//         if (!showPage) {
+//             setShowList(false);
+//         }
+//     };
+
+//     const toggleSentBoxHandler = () => {
+//         setShowList((prevState) => !prevState);
+//         if (!showList && !showInbox) {
+//             setShowPage(false);
+//             setShowInbox(false);
+//         }
+//     };
+
+//    const toggleInboxHandler = () =>{
+//        setShowInbox((prevState)=> !prevState);
+//        if (!showList && !showPage) {
+//         setShowPage(false);
+//         setShowPage(false);
+//     }
+//    }
 
     return (
         <Fragment>
-        <h1>Welcome to the email </h1>
-        <button onClick={logoutHandler}>logout</button>
-        <button onClick={toggleInboxHandler}>
-        {showInbox ? "Hide Inbox" : "Show Inbox"}
-        </button>
-        {showInbox && <Inbox />}
+            <div className={classes.container}>
+                <div className={classes.header}>
+                    <h1>Welcome to the Mailbox</h1>
+                    <button onClick={logoutHandler} className={classes.logoutButton}>Logout</button>
+                </div>
+                <div className={classes.buttonGroup}>
+                    <button onClick={() => togglePageHandler('compose')} className={classes.button}>
+                        Compose
+                    </button>
+                    <button onClick={() => togglePageHandler('sent')} className={classes.button}>
+                        Sent
+                    </button>
+                    <button onClick={() => togglePageHandler('inbox')} className={classes.button}>
+                        Inbox
+                    </button>
+                </div>
+                {currentPage === 'compose' && <Compose closeComposePage={() => setCurrentPage(null)} />}
+                {currentPage === 'sent' && <Sent closeSentPage={() => setCurrentPage(null)} />}
+                {currentPage === 'inbox' && <Inbox closeInboxPage={() => setCurrentPage(null)} />}
+
+            </div>
         </Fragment>
     );
-}
+};
 
 export default Welcome;
