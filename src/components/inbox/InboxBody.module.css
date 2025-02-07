@@ -6,6 +6,19 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
+    max-height: 90vh; 
+    overflow-y: auto; 
+}
+
+.inboxBody {
+    max-height: 70vh;    /* Control the body height */
+    overflow-y: auto;    /* Enable vertical scrolling */
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;    /* Improve readability */
+    white-space: pre-wrap;  /* Preserve line breaks */
 }
 
 .header {

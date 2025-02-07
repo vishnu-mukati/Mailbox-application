@@ -27,6 +27,9 @@ const ComposeSlice = createSlice({
                 email.isRead = true;
                 state.unreadCount -= 1; 
             }
+        },
+        deleteEmail: (state, action) => {
+            state.inbox = state.inbox.filter(email => email.id !== action.payload);
         }
     }
 });

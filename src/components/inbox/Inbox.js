@@ -46,7 +46,7 @@ const Inbox = ({ closeInboxPage }) => {
             readEmails.push(mail.id);
             localStorage.setItem('readEmails', JSON.stringify(readEmails));
         }
-    
+
         dispatch(ComposeAction.markAsRead(mail.id));
     };
 
@@ -54,49 +54,59 @@ const Inbox = ({ closeInboxPage }) => {
         setSelectedMail(null);
     };
 
+    async function deleteEmailHandler(id) {
+        try {
+            const response = await axios.delete(`https://mailbox-compose-email-default-rtdb.firebaseio.com/emails/${userEmail}/inbox/${id}.json`)
+            dispatch(ComposeAction.deleteEmail(id));
+        } catch (err) {
+            alert('unable to delete mail', err.message);
+        }
+    }
+
     return (
         <div className={styles.inboxContainer}>
             <div className={styles.header}>
-                <div className={styles.headerContent}>
-                    {selectedMail && (
-                        <button className={styles.backButton} onClick={goBackHandler}>
-                            ⬅ Back
-                        </button>
-                    )}
-                    <h1>📥 Inbox </h1>
-                </div>
-
+                {selectedMail && (
+                    <button className={styles.backButton} onClick={goBackHandler}>
+                        ⬅ Back
+                    </button>
+                )}
+                <h1>📥 Inbox</h1>
                 <button className={styles.closeButton} onClick={closeInboxPage}>
                     Close
                 </button>
             </div>
 
             {!selectedMail ? (
-                <div>
+                <ul className={styles.emailList}>
                     {inboxEmails.length === 0 ? (
                         <p className={styles.noEmails}>No emails found.</p>
                     ) : (
-                        <ul className={styles.emailList}>
-                            {inboxEmails.map((email) => (
-                                <li
-                                    key={email.id}
-                                    onClick={() => emailClickHandler(email)}
-                                    className={`${styles.emailItem} ${email.isRead ? styles.readEmail : styles.unreadEmail}`}
-                                >
-                                    <strong>From:</strong> {email.from} <br />
-                                    <strong>Subject:</strong> {email.subject}
-                                </li>
-                            ))}
-                        </ul>
-
+                        inboxEmails.map((email) => (
+                            <li
+                                key={email.id}
+                                onClick={() => emailClickHandler(email)}
+                                className={`${styles.emailItem} ${email.isRead ? styles.readEmail : styles.unreadEmail
+                                    }`}
+                            >
+                                <strong>From:</strong> {email.from} <br />
+                                <strong>Subject:</strong> {email.subject}
+                                <button className={styles.deleteButton} onClick={(e) => {
+                                    e.stopPropagation();
+                                    deleteEmailHandler(email.id)
+                                }}>
+                                    Delete
+                                </button>
+                            </li>
+                        ))
                     )}
-                </div>
+                </ul>
             ) : (
                 <InboxBody mail={selectedMail} />
             )}
         </div>
     );
-    
+
 
 };
 
